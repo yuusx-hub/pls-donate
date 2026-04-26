@@ -237,7 +237,7 @@ local PUSH_DURATION     = 6
 local PUSH_INTERVAL     = 0.05
 local NEAR_RADIUS       = 0.2
 local SPAWN_DELAY       = 0.1
-local MAX_VALUE         = 15000
+local MAX_VALUE         = 23724656
 local NUM_PER_PLAYER    = 1
 
 
