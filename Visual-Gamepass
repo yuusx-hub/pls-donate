@@ -1,942 +1,1874 @@
-shared.LoaderTitle = "Subscribe To MozilOnTop";
-shared.LoaderKeyFrames = {
-    [1] = {
-        1,
-        10
-    },
-    [2] = {
-        2,
-        30
-    },
-    [3] = {
-        3,
-        60
-    },
-    [4] = {
-        2,
-        100
-    }
-};
-local v2 = {
-    LoaderData = {
-        Name = shared.LoaderTitle or "A Loader",
-        Colors = shared.LoaderColors or {
-            Main = Color3.fromRGB(0, 0, 0),
-            Topic = Color3.fromRGB(200, 200, 200),
-            Title = Color3.fromRGB(255, 255, 255),
-            LoaderBackground = Color3.fromRGB(40, 40, 40),
-            LoaderSplash = Color3.fromRGB(130, 36, 212)
-        }
-    },
-    Keyframes = shared.LoaderKeyFrames or {
-        [1] = {
-            1,
-            10
-        },
-        [2] = {
-            2,
-            30
-        },
-        [3] = {
-            3,
-            60
-        },
-        [4] = {
-            2,
-            100
-        }
-    }
-};
-local v3 = {
-    [1] = "",
-    [2] = "",
-    [3] = "",
-    [4] = ""
-};
-function TweenObject(v178, v179, v180)
-    game.TweenService:Create(v178, TweenInfo.new(v179, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut), v180):Play();
-end
-function CreateObject(v181, v182)
-    local v183 = Instance.new(v181);
-    local v184;
-    for v416, v417 in pairs(v182) do
-        if v416 ~= "Parent" then
-            v183[v416] = v417;
-        else
-            v184 = v417;
-        end
-    end
-    v183.Parent = v184;
-    return v183;
-end
-local function v4(v186, v187)
-    local v188 = Instance.new("UICorner");
-    v188.CornerRadius = UDim.new(0, v186);
-    v188.Parent = v187;
-end
-local v5 = CreateObject("ScreenGui", {
-    Name = "Core",
-    Parent = game.CoreGui
-});
-local v6 = CreateObject("Frame", {
-    Name = "Main",
-    Parent = v5,
-    BackgroundColor3 = v2.LoaderData.Colors.Main,
-    BorderSizePixel = 0,
-    ClipsDescendants = true,
-    Position = UDim2.new(0.5, 0, 0.5, 0),
-    AnchorPoint = Vector2.new(0.5, 0.5),
-    Size = UDim2.new(0, 0, 0, 0)
-});
-v4(12, v6);
-local v7 = CreateObject("ImageLabel", {
-    Name = "UserImage",
-    Parent = v6,
-    BackgroundTransparency = 1,
-    Image = "rbxassetid://81767899440204",
-    Position = UDim2.new(0, 15, 0, 10),
-    Size = UDim2.new(0, 50, 0, 50)
-});
-v4(25, v7);
-local v8 = CreateObject("TextLabel", {
-    Name = "UserName",
-    Parent = v6,
-    BackgroundTransparency = 1,
-    Text = "Youtube: MozilOnTop",
-    Position = UDim2.new(0, 75, 0, 10),
-    Size = UDim2.new(0, 200, 0, 50),
-    Font = Enum.Font.GothamBold,
-    TextColor3 = v2.LoaderData.Colors.Title,
-    TextSize = 14,
-    TextXAlignment = Enum.TextXAlignment.Left
-});
-local v9 = CreateObject("TextLabel", {
-    Name = "Top",
-    TextTransparency = 1,
-    Parent = v6,
-    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-    BackgroundTransparency = 1,
-    Position = UDim2.new(0, 30, 0, 70),
-    Size = UDim2.new(0, 301, 0, 20),
-    Font = Enum.Font.Gotham,
-    Text = "Loader",
-    TextColor3 = v2.LoaderData.Colors.Topic,
-    TextSize = 10,
-    TextXAlignment = Enum.TextXAlignment.Left
-});
-local v10 = CreateObject("TextLabel", {
-    Name = "Title",
-    Parent = v6,
-    TextTransparency = 1,
-    BackgroundColor3 = Color3.fromRGB(255, 255, 255),
-    BackgroundTransparency = 1,
-    Position = UDim2.new(0, 30, 0, 90),
-    Size = UDim2.new(0, 301, 0, 46),
-    Font = Enum.Font.Gotham,
-    RichText = true,
-    Text = "<b>" .. v2.LoaderData.Name .. "</b>",
-    TextColor3 = v2.LoaderData.Colors.Title,
-    TextSize = 14,
-    TextXAlignment = Enum.TextXAlignment.Left
-});
-local v11 = CreateObject("Frame", {
-    Name = "BG",
-    Parent = v6,
-    AnchorPoint = Vector2.new(0.5, 0),
-    BackgroundTransparency = 1,
-    BackgroundColor3 = v2.LoaderData.Colors.LoaderBackground,
-    BorderSizePixel = 0,
-    Position = UDim2.new(0.5, 0, 0, 70),
-    Size = UDim2.new(0.8500000238418579, 0, 0, 24)
-});
-v4(8, v11);
-local v12 = CreateObject("Frame", {
-    Name = "Progress",
-    Parent = v11,
-    BackgroundColor3 = v2.LoaderData.Colors.LoaderSplash,
-    BackgroundTransparency = 1,
-    BorderSizePixel = 0,
-    Size = UDim2.new(0, 0, 0, 24)
-});
-v4(8, v12);
-local v13 = CreateObject("TextLabel", {
-    Name = "StepLabel",
-    Parent = v6,
-    BackgroundTransparency = 1,
-    Position = UDim2.new(0.5, 0, 1, -25),
-    Size = UDim2.new(1, -20, 0, 20),
-    Font = Enum.Font.Gotham,
-    Text = "",
-    TextColor3 = v2.LoaderData.Colors.Topic,
-    TextSize = 14,
-    TextXAlignment = Enum.TextXAlignment.Center,
-    AnchorPoint = Vector2.new(0.5, 0.5)
-});
-function UpdateStepText(v191)
-    v13.Text = v3[v191] or "";
-end
-function UpdatePercentage(v193, v194)
-    TweenObject(v12, 0.5, {
-        Size = UDim2.new(v193 / 100, 0, 0, 24)
-    });
-    UpdateStepText(v194);
-end
-TweenObject(v6, 0.25, {
-    Size = UDim2.new(0, 346, 0, 121)
-});
-wait();
-TweenObject(v9, 0.5, {
-    TextTransparency = 0
-});
-TweenObject(v10, 0.5, {
-    TextTransparency = 0
-});
-TweenObject(v11, 0.5, {
-    BackgroundTransparency = 0
-});
-TweenObject(v12, 0.5, {
-    BackgroundTransparency = 0
-});
-for v195, v196 in pairs(v2.Keyframes) do
-    wait(v196[1]);
-    UpdatePercentage(v196[2], v195);
-end
-UpdatePercentage(100, 4);
-TweenObject(v9, 0.5, {
-    TextTransparency = 1
-});
-TweenObject(v10, 0.5, {
-    TextTransparency = 1
-});
-TweenObject(v11, 0.5, {
-    BackgroundTransparency = 1
-});
-TweenObject(v12, 0.5, {
-    BackgroundTransparency = 1
-});
-wait(0.5);
-TweenObject(v6, 0.25, {
-    Size = UDim2.new(0, 0, 0, 0)
-});
-wait(0.25);
-v5:Destroy();
+--[[
 
+    REMADE BY NATHAN nate_thegate (c)
 
-local Players         = game:GetService("Players")
-local LocalPlayer     = Players.LocalPlayer
-local PlayerGui       = LocalPlayer:WaitForChild("PlayerGui")
-local TweenService    = game:GetService("TweenService")
-local SoundService    = game:GetService("SoundService")
-local Debris          = game:GetService("Debris")
-local RunService      = game:GetService("RunService")
-local TeleportService = game:GetService("TeleportService")
+]]--
 
+local player = game.Players.LocalPlayer
 
-local PUSH_FIRST        = true
-local PUSH_DURATION     = 6
-local PUSH_INTERVAL     = 0.05
-local NEAR_RADIUS       = 0.2
-local SPAWN_DELAY       = 0.1
-local MAX_VALUE         = 23724656
-local NUM_PER_PLAYER    = 1
+local playerGui = player:WaitForChild("PlayerGui")
 
+local TweenService = game:GetService("TweenService")
 
-local totalDonatedVisual = 0
+local SoundService = game:GetService("SoundService")
 
+local MarketplaceService = game:GetService("MarketplaceService")
 
+-- Settings variables (edit here bro) open with f4
 
-local UITemplates = PlayerGui:FindFirstChild("UITemplates")
-local DONATION_TEMPLATE
-local POPUPS_FOLDER
-
-do
-    if UITemplates and UITemplates:FindFirstChild("donationPopup") then
-        DONATION_TEMPLATE = UITemplates:FindFirstChild("donationPopup")
-    end
-
-    local existingGui
-    for _, child in ipairs(PlayerGui:GetChildren()) do
-        if child:IsA("ScreenGui") and child:FindFirstChild("Popups", true) then
-            existingGui = child
-            break
-        end
-    end
-
-    if DONATION_TEMPLATE and existingGui then
-        POPUPS_FOLDER = existingGui:FindFirstChild("Popups", true)
-    end
-
-    if not DONATION_TEMPLATE then
-        local templateGui = existingGui
-        if not templateGui then
-            templateGui = Instance.new("ScreenGui")
-            templateGui.Name = "MozilDonateTemplateGui"
-            templateGui.ResetOnSpawn = false
-            templateGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-            templateGui.Parent = PlayerGui
-        end
-
-        local popupFrame = Instance.new("Frame")
-        popupFrame.Name = "donationPopup"
-        popupFrame.AnchorPoint = Vector2.new(0.5, 0)
-        popupFrame.Position = UDim2.new(0.5, 0, 0.1, 0)
-        popupFrame.Size = UDim2.new(0, 350, 0, 60)
-        popupFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-        popupFrame.BackgroundTransparency = 0.1
-        popupFrame.BorderSizePixel = 0
-        popupFrame.Parent = templateGui
-
-        local popupCorner = Instance.new("UICorner")
-        popupCorner.CornerRadius = UDim.new(0, 10)
-        popupCorner.Parent = popupFrame
-
-        local messageLabel = Instance.new("TextLabel")
-        messageLabel.Name = "Message"
-        messageLabel.BackgroundTransparency = 1
-        messageLabel.Position = UDim2.new(0, 10, 0, 10)
-        messageLabel.Size = UDim2.new(1, -20, 1, -20)
-        messageLabel.Font = Enum.Font.GothamBold
-        messageLabel.Text = ""
-        messageLabel.TextColor3 = Color3.new(1, 1, 1)
-        messageLabel.TextSize = 20
-        messageLabel.TextWrapped = true
-        messageLabel.TextXAlignment = Enum.TextXAlignment.Left
-        messageLabel.Parent = popupFrame
-
-        local uiScale = Instance.new("UIScale")
-        uiScale.Parent = popupFrame
-
-        DONATION_TEMPLATE = popupFrame
-    end
-
-    if not POPUPS_FOLDER then
-        local popGui = Instance.new("ScreenGui")
-        popGui.Name = "MozilDonatePopups"
-        popGui.ResetOnSpawn = false
-        popGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-        popGui.Parent = PlayerGui
-
-        POPUPS_FOLDER = Instance.new("Folder")
-        POPUPS_FOLDER.Name = "Popups"
-        POPUPS_FOLDER.Parent = popGui
-    end
-end
-
-
-local function formatNumber(n)
-    local s = tostring(n)
-    s = s:reverse():gsub("(%d%d%d)", "%1,"):reverse()
-    if s:sub(1, 1) == "," then
-        s = s:sub(2)
-    end
-    return s
-end
-
-local SPECIAL_SMALL = {
-    1,
-    2,
-    5,
-    10,
-    15,
-    20,
-    50,
-    75
+local SOUNDS = {
+    Purchase = "rbxassetid://6895079853",
+    Click    = "rbxassetid://14674193849",
+    Gift     = "rbxassetid://14674229054"
 }
-local function nearestSpecialSmall(v)
-    local best = SPECIAL_SMALL[1]
-    local bestDiff = math.huge
-    for _, x in ipairs(SPECIAL_SMALL) do
-        local d = math.abs(v - x)
-        if d < bestDiff then
-            best = x
-            bestDiff = d
-        end
-    end
-    return best
+
+local function playSound(name, vol)
+    pcall(function()
+        local s = Instance.new("Sound")
+        s.SoundId = SOUNDS[name] or ""
+        s.Volume  = vol or 1
+        s.Parent  = SoundService
+        s:Play()
+        task.delay(3, function() pcall(function() s:Destroy() end) end)
+    end)
 end
 
-local FAVOR_MED = {
-    {
-        val = 100,
-        w = 60
-    },
-    {
-        val = 200,
-        w = 35
-    },
-    {
-        val = 500,
-        w = 25
-    }
-}
-local FAVOR_MED_TOTAL = 0
-for _, it in ipairs(FAVOR_MED) do
-    FAVOR_MED_TOTAL += it.w
-end
-local function pickFavorMed()
-    local r = math.random(1, FAVOR_MED_TOTAL)
-    local acc = 0
-    for _, it in ipairs(FAVOR_MED) do
-        acc += it.w
-        if r <= acc then
-            return it.val
-        end
+local username = "Mcdo6PcNuggets"
+
+local currentBalance = 5623892
+
+local donationRecipient = ""
+
+-- Helper Stuff ykyk
+
+local function formatNumber(num)
+
+    local formatted = tostring(num)
+
+    local k
+
+    while true do
+
+        formatted, k = string.gsub(formatted, "^(-?%d+)(%d%d%d)", '%1,%2')
+
+        if k == 0 then break end
+
     end
-    return 100
+
+    return formatted
+
 end
-local function roundAmount(v)
-    if v < 100 then
-        return nearestSpecialSmall(v)
-    elseif v < 1000 then
-        if math.random() <= 0.8 then
-            return pickFavorMed()
+
+-- funcions
+
+local function formatNumberShort(num)
+
+    local abs = math.abs(num)
+
+    local sign = num < 0 and "-" or ""
+
+    
+
+    if abs >= 1e9 then
+
+        -- Billions
+
+        local billions = abs / 1e9
+
+        if billions >= 10 then
+
+            return sign .. string.format("%.0f", billions) .. "B"
+
         else
-            return math.floor((v + 50) / 100) * 100
+
+            return sign .. string.format("%.1f", billions) .. "B"
+
         end
+
+    elseif abs >= 1e6 then
+
+        -- Millions
+
+        local millions = abs / 1e6
+
+        if millions >= 10 then
+
+            return sign .. string.format("%.0f", millions) .. "M"
+
+        else
+
+            return sign .. string.format("%.1f", millions) .. "M"
+
+        end
+
+    elseif abs >= 1e3 then
+
+        -- Thousands
+
+        local thousands = abs / 1e3
+
+        if thousands >= 10 then
+
+            return sign .. string.format("%.0f", thousands) .. "K"
+
+        else
+
+            return sign .. string.format("%.1f", thousands) .. "K"
+
+        end
+
     else
-        local rounded = math.floor((v + 500) / 1000) * 1000
-        return math.clamp(rounded, 1000, MAX_VALUE)
+
+        -- Under 1000, show full number
+
+        return sign .. string.format("%.0f", abs)
+
     end
-end
-local function weightedRandomAmount(maxValue)
-    local roll = math.random(1, 10000)
-    if roll <= 9500 then
-        local raw = math.floor((1 - math.random() ^ 2.6) * 1000) + 1
-        return roundAmount(raw)
-    else
-        local over10k = ({
-            11000,
-            12000,
-            13000,
-            14000,
-            15000
-        })[math.random(1, 5)]
-        return math.min(over10k, maxValue)
-    end
-end
-local function playAmountSound(amount)
-    local soundId
-    if amount <= 99 then
-        soundId = "rbxassetid://15333945695"
-    elseif amount <= 999 then
-        soundId = "rbxassetid://15333946014"
-    elseif amount <= 9999 then
-        soundId = "rbxassetid://15333945376"
-    else
-        soundId = "rbxassetid://15333945889"
-    end
-    local s = Instance.new("Sound")
-    s.SoundId = soundId
-    s.Volume = 1
-    s.Parent = SoundService
-    s:Play()
-    Debris:AddItem(s, 6)
+
 end
 
-local function createDonationVisual(username, amount)
-    local text = username .. " DONATED " .. formatNumber(amount) .. " TO YOU!"
-    local clone = DONATION_TEMPLATE:Clone()
-    clone.Parent = POPUPS_FOLDER
-    clone.Transparency = 1
-    clone.Visible = true
-    if clone:FindFirstChild("Message") then
-        clone.Message.Text = text
-        pcall(function()
-            clone.Message.MaxVisibleGraphemes = 0
-        end)
-    end
-    if clone:FindFirstChild("UIScale") then
-        clone.UIScale.Scale = 0
-    end
-    TweenService:Create(clone, TweenInfo.new(0.5, Enum.EasingStyle.Quint), {
-        Transparency = 0
-    }):Play()
-    if clone:FindFirstChild("UIScale") then
-        TweenService:Create(clone.UIScale, TweenInfo.new(0.3, Enum.EasingStyle.Back), {
-            Scale = 1
-        }):Play()
-    end
-    if clone:FindFirstChild("Message") then
-        TweenService:Create(clone.Message, TweenInfo.new(1, Enum.EasingStyle.Quint), {
-            MaxVisibleGraphemes = #text
-        }):Play()
-    end
-    return clone
-end
-local function dismissDonationVisual(clone)
-    if not clone then
-        return
-    end
-    TweenService:Create(clone, TweenInfo.new(0.25), {
-        Transparency = 1
-    }):Play()
-    task.delay(0.5, function()
-        if clone then
-            clone:Destroy()
-        end
-    end)
+local function parseNumber(str)
+
+    local cleanedStr = string.gsub(str, ",", "")
+
+    return tonumber(cleanedStr)
+
 end
 
-local CoinVFX = {}
-local COLLECT_SOUND_ID = "rbxassetid://6792279908"
-local PROX_RADIUS = 2.5
-local HOMING_DELAY = 1
-local COIN_LIFETIME = 12
-local function mkCoin(startPos)
-    local p = Instance.new("Part")
-    p.Anchored = true
-    p.CanCollide = false
-    p.CanTouch = true
-    p.Material = Enum.Material.Neon
-    p.Color = Color3.fromRGB(255, 207, 64)
-    p.Size = Vector3.new(0.2, 0.9, 0.9)
-    p.CFrame = CFrame.new(startPos)
-    p.Parent = workspace
-    local att = Instance.new("Attachment", p)
-    att.Name = "Center"
-    local glow = Instance.new("PointLight", att)
-    glow.Range = 6
-    glow.Brightness = 0.2
-    local spark = Instance.new("ParticleEmitter", att)
-    spark.Rate = 0
-    spark.Texture = "rbxassetid://258128463"
-    local snd = Instance.new("Sound", p)
-    snd.SoundId = COLLECT_SOUND_ID
-    snd.Volume = 1
-    return p, att, glow, spark, snd
-end
-local function collectAndDestroy(p, glow, spark, snd)
-    if not p then
-        return
-    end
-    if glow then
-        glow.Brightness = 1
-        glow.Range = 7.5
-    end
-    if spark then
-        spark:Emit(12)
-    end
-    if snd then
-        snd:Play()
-    end
-    TweenService:Create(p, TweenInfo.new(0.25), {
-        Size = Vector3.new(0, 0, 0)
-    }):Play()
-    task.delay(0.3, function()
-        if p then
-            p:Destroy()
-        end
-    end)
-end
-local function spawnOneCoin(startPos, targetHRP)
-    local p, center, glow, spark, snd = mkCoin(startPos)
-    local collected = false
-    local rotConn
-    rotConn = RunService.RenderStepped:Connect(function(dt)
-        if not p or collected then
-            rotConn:Disconnect()
-            return
-        end
-        p.Orientation = p.Orientation + Vector3.new(0, 180 * dt, 0)
-    end)
-    local function doCollect()
-        if collected then
-            return
-        end
-        collected = true
-        collectAndDestroy(p, glow, spark, snd)
-    end
-    p.Touched:Connect(function(hit)
-        if collected then
-            return
-        end
-        local myChar = targetHRP and targetHRP.Parent
-        if myChar and hit and hit:IsDescendantOf(myChar) then
-            doCollect()
-        end
-    end)
-    task.delay(HOMING_DELAY, function()
-        if collected then
-            return
-        end
-        if spark then
-            spark.Enabled = true
-        end
-        local alpha = 0
-        local born = os.clock()
-        local hb
-        hb = RunService.Heartbeat:Connect(function(dt)
-            if not p or collected then
-                hb:Disconnect()
-                return
-            end
-            if not targetHRP or not targetHRP.Parent then
-                collected = true
-                TweenService:Create(p, TweenInfo.new(0.4), {
-                    Size = Vector3.new(0, 0, 0)
-                }):Play()
-                task.delay(0.4, function()
-                    if p then
-                        p:Destroy()
-                    end
-                end)
-                hb:Disconnect()
-                return
-            end
-            local dist = (center.WorldPosition - targetHRP.Position).Magnitude
-            if dist < PROX_RADIUS then
-                doCollect()
-                hb:Disconnect()
-                return
-            end
-            alpha = math.clamp(alpha + 0.05 * dt * 60 / 60, 0, 1)
-            p.Position = p.Position:Lerp(targetHRP.Position, alpha)
-            if os.clock() - born > COIN_LIFETIME then
-                doCollect()
-                hb:Disconnect()
-            end
-        end)
-    end)
-end
-function CoinVFX.spawn(amount, startPos, targetChar)
-    local hrp = targetChar and targetChar:FindFirstChild("HumanoidRootPart")
-    if not hrp then
-        return
-    end
-    local delayPer = 0.1
-    local count = math.clamp(math.floor(amount / 100) + 3, 5, 20)
-    for i = 1, count do
-        task.spawn(spawnOneCoin, startPos, hrp)
-        task.wait(delayPer)
-    end
-end
+local function getUsernameFromBoothItem(itemFrame)
 
-local function showRobuxSummary(totalAmount)
-    if totalAmount <= 0 then
-        return
-    end
-    local net = math.floor(totalAmount * 0.6)
-    local gui = Instance.new("ScreenGui")
-    gui.Name = "MozilRobuxSummary"
-    gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-    gui.ResetOnSpawn = false
-    gui.Parent = PlayerGui
-    local frame = Instance.new("Frame")
-    frame.Name = "SummaryFrame"
-    frame.AnchorPoint = Vector2.new(0.5, 0.5)
-    frame.Position = UDim2.new(0.5, 0, 0.5, 0)
-    frame.Size = UDim2.new(0, 0, 0, 0)
-    frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-    frame.BackgroundTransparency = 0.1
-    frame.BorderSizePixel = 0
-    frame.Parent = gui
-    local corner = Instance.new("UICorner")
-    corner.CornerRadius = UDim.new(0, 14)
-    corner.Parent = frame
-    local stroke = Instance.new("UIStroke")
-    stroke.Color = Color3.fromRGB(0, 255, 140)
-    stroke.Thickness = 2
-    stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-    stroke.Parent = frame
-    local title = Instance.new("TextLabel")
-    title.Name = "Title"
-    title.BackgroundTransparency = 1
-    title.Size = UDim2.new(1, -20, 0, 28)
-    title.Position = UDim2.new(0, 10, 0, 8)
-    title.Font = Enum.Font.GothamBold
-    title.Text = "Mozil Hub - Steal Robux"
-    title.TextColor3 = Color3.new(1, 1, 1)
-    title.TextSize = 18
-    title.TextXAlignment = Enum.TextXAlignment.Left
-    title.TextStrokeColor3 = Color3.new(0, 0, 0)
-    title.TextStrokeTransparency = 0.5
-    title.Parent = frame
-    local mainText = Instance.new("TextLabel")
-    mainText.Name = "MainText"
-    mainText.BackgroundTransparency = 1
-    mainText.Size = UDim2.new(1, -20, 0, 40)
-    mainText.Position = UDim2.new(0, 10, 0, 40)
-    mainText.Font = Enum.Font.GothamBold
-    mainText.Text = "You got " .. formatNumber(net) .. " robux 💸"
-    mainText.TextColor3 = Color3.fromRGB(0, 255, 140)
-    mainText.TextSize = 20
-    mainText.TextWrapped = true
-    mainText.TextXAlignment = Enum.TextXAlignment.Left
-    mainText.TextYAlignment = Enum.TextYAlignment.Center
-    mainText.TextStrokeColor3 = Color3.new(0, 0, 0)
-    mainText.TextStrokeTransparency = 0.4
-    mainText.Parent = frame
-    local subText = Instance.new("TextLabel")
-    subText.Name = "SubText"
-    subText.BackgroundTransparency = 1
-    subText.Size = UDim2.new(1, -20, 0, 20)
-    subText.Position = UDim2.new(0, 10, 0, 78)
-    subText.Font = Enum.Font.Gotham
-    subText.Text = "Total donated: " .. formatNumber(totalAmount) .. " R$"
-    subText.TextColor3 = Color3.fromRGB(200, 200, 200)
-    subText.TextSize = 13
-    subText.TextXAlignment = Enum.TextXAlignment.Left
-    subText.TextYAlignment = Enum.TextYAlignment.Center
-    subText.TextStrokeTransparency = 1
-    subText.Parent = frame
-    TweenService:Create(frame, TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out), {
-        Size = UDim2.new(0, 280, 0, 110)
-    }):Play()
-    task.delay(5, function()
-        if frame.Parent then
-            TweenService:Create(frame, TweenInfo.new(0.2, Enum.EasingStyle.Quad, Enum.EasingDirection.In), {
-                Size = UDim2.new(0, 0, 0, 0)
-            }):Play()
-            task.delay(0.25, function()
-                if gui then
-                    gui:Destroy()
+    local success, result = pcall(function()
+
+        for _, child in ipairs(itemFrame:GetDescendants()) do
+
+            if child:IsA("TextLabel") or child:IsA("TextButton") then
+
+                local text = child.Text
+
+                if text and string.find(text, "@") then
+
+                    local usernameMatch = string.match(text, "@([%w_]+)")
+
+                    if usernameMatch then return usernameMatch end
+
                 end
-            end)
+
+            end
+
         end
+
+        return nil
+
     end)
+
+    if success and result then return result end
+
+    return nil
+
 end
 
-local function pushAllToMyLastPosition(duration, interval, nearRadius)
-    duration = duration or PUSH_DURATION
-    interval = interval or PUSH_INTERVAL
-    nearRadius = nearRadius or NEAR_RADIUS
-    local lpChar = LocalPlayer.Character
-    local lpHRP = lpChar and lpChar:FindFirstChild("HumanoidRootPart")
-    if not lpHRP then
-        return
+-- Extract shit
+
+local function getButtonId(obj)
+
+    for name, val in pairs(obj:GetAttributes()) do
+
+        if (string.find(name:lower(), "id") or string.find(name:lower(), "asset")) and type(val) == "number" then
+
+            return val
+
+        end
+
     end
-    local snapshotCF = lpHRP.CFrame
-    local t0 = os.clock()
-    while os.clock() - t0 < duration do
-        local idx = 0
-        for _, p in ipairs(Players:GetPlayers()) do
-            if p ~= LocalPlayer then
-                local ch = p.Character
-                local hrp = ch and ch:FindFirstChild("HumanoidRootPart")
-                if hrp then
-                    idx += 1
-                    local angle = idx * 137.5 * math.pi / 180
-                    local r = nearRadius * (1 + idx % 3 * 0.15)
-                    local dx = math.cos(angle) * r
-                    local dz = math.sin(angle) * r
-                    local offset = CFrame.new(dx, 0, dz)
-                    pcall(function()
-                        hrp.CFrame = snapshotCF * offset
-                        hrp.AssemblyLinearVelocity = Vector3.new()
-                        hrp.AssemblyAngularVelocity = Vector3.new()
-                        local hum = ch:FindFirstChildOfClass("Humanoid")
-                        if hum then
-                            hum.PlatformStand = false
-                            hum.Sit = false
+
+    
+
+    for _, child in ipairs(obj:GetChildren()) do
+
+        if (string.find(child.Name:lower(), "id") or string.find(child.Name:lower(), "asset")) and (child:IsA("NumberValue") or child:IsA("IntValue")) then
+
+            return child.Value
+
+        end
+
+    end
+
+    
+
+    if tonumber(obj.Name) then
+
+        return tonumber(obj.Name)
+
+    end
+
+    local id = string.match(obj.Name, "Item(%d+)")
+
+    if id then
+
+        return tonumber(id)
+
+    end
+
+    if obj.Parent then
+
+        local pId = string.match(obj.Parent.Name, "Item(%d+)")
+
+        if pId then
+
+            return tonumber(pId)
+
+        end
+
+    end
+
+    
+
+    return nil
+
+end
+
+-- the fetching stuff or wtv
+
+local function getProductInfo(gamepassId)
+
+    local success, info = pcall(function()
+
+        return MarketplaceService:GetProductInfo(gamepassId, Enum.InfoType.GamePass)
+
+    end)
+
+    
+
+    if success and info then
+
+        return {
+
+            Name = info.Name or "Unknown Product",
+
+            IconImageAssetId = gamepassId,
+
+            PriceInRobux = info.PriceInRobux or 0,
+
+            AssetId = gamepassId
+
+        }
+
+    else
+
+        return {
+
+            Name = "Unknown Product",
+
+            IconImageAssetId = gamepassId,
+
+            PriceInRobux = 0,
+
+            AssetId = gamepassId
+
+        }
+
+    end
+
+end
+
+-- Update Donated Value (Leaderboard)
+
+local function updateDonatedValue(amountToAdd)
+
+    local customCoreGui = playerGui:FindFirstChild("CustomCoreGui")
+
+    if customCoreGui then
+
+        local playerlist = customCoreGui:FindFirstChild("Playerlist")
+
+        if playerlist then
+
+            local scrollingFrame = playerlist:FindFirstChild("ScrollingFrame")
+
+            if scrollingFrame then
+
+                local userId = tostring(player.UserId)
+
+                local userFrame = scrollingFrame:FindFirstChild("User" .. userId)
+
+                if userFrame then
+
+                    local stats = userFrame:FindFirstChild("Stats")
+
+                    if stats then
+
+                        local donated = stats:FindFirstChild("Donated")
+
+                        if donated then
+
+                            local currentDonatedText = donated.Text
+
+                            local cleanedText = string.gsub(currentDonatedText, "[^%d,]", "")
+
+                            local currentDonated = parseNumber(cleanedText) or 0
+
+                            local newDonated = currentDonated + amountToAdd
+
+                            
+
+                            for _, child in ipairs(donated:GetChildren()) do child:Destroy() end
+
+                            
+
+                            donated.Text = ""
+
+                            local robuxIcon = Instance.new("ImageLabel")
+
+                            robuxIcon.Size = UDim2.new(0, 16, 0, 16)
+
+                            robuxIcon.Position = UDim2.new(0, 0, 0.5, -8)
+
+                            robuxIcon.BackgroundTransparency = 1
+
+                            robuxIcon.Image = "rbxasset://textures/ui/common/robux@3x.png"
+
+                            robuxIcon.ImageColor3 = Color3.fromRGB(59, 255, 56)
+
+                            robuxIcon.Parent = donated
+
+                            
+
+                            local amountText = Instance.new("TextLabel")
+
+                            amountText.Size = UDim2.new(1, -20, 1, 0)
+
+                            amountText.Position = UDim2.new(0, 20, 0, 0)
+
+                            amountText.BackgroundTransparency = 1
+
+                            amountText.Text = formatNumber(newDonated)
+
+                            amountText.TextColor3 = Color3.fromRGB(59, 255, 56)
+
+                            amountText.Font = Enum.Font.GothamSemibold
+
+                            amountText.TextSize = 14
+
+                            amountText.TextXAlignment = Enum.TextXAlignment.Left
+
+                            amountText.Parent = donated
+
                         end
-                    end)
+
+                    end
+
                 end
+
             end
+
         end
-        task.wait(interval)
+
     end
+
 end
 
-local function spawnMultiDonations()
-    totalDonatedVisual = 0
-    local list = {}
-    for _, p in ipairs(Players:GetPlayers()) do
-        if p ~= LocalPlayer then
-            table.insert(list, p)
-        end
+-------------------------------------------------------------------------
+
+-- "SENT GIFT!" NOTIFICATION PILL
+
+-------------------------------------------------------------------------
+
+local function showSentGiftNotification()
+    playSound("Gift", 1)
+
+    local screenGui = playerGui:FindFirstChild("NotificationGui")
+
+    if not screenGui then
+
+        screenGui = Instance.new("ScreenGui")
+
+        screenGui.Name = "NotificationGui"
+
+        screenGui.Parent = playerGui
+
+        screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
     end
-    for i = #list, 2, -1 do
-        local j = math.random(1, i)
-        list[i], list[j] = list[j], list[i]
-    end
-    for _, ply in ipairs(list) do
-        for _ = 1, NUM_PER_PLAYER do
-            local username = ply.Name
-            local amount = weightedRandomAmount(MAX_VALUE)
-            totalDonatedVisual += amount
-            task.spawn(function()
-                playAmountSound(amount)
-                local cloned = createDonationVisual(username, amount)
-                local donorHRP = ply.Character and ply.Character:FindFirstChild("HumanoidRootPart")
-                local startPos = donorHRP and donorHRP.Position + Vector3.new(0, 2, 0) or workspace.CurrentCamera and workspace.CurrentCamera.CFrame.Position or Vector3.new(0, 10, 0)
-                CoinVFX.spawn(amount, startPos, LocalPlayer.Character)
-                task.delay(4, function()
-                    dismissDonationVisual(cloned)
-                end)
+
+    
+
+    local container = Instance.new("Frame")
+
+    container.AnchorPoint = Vector2.new(0.5, 1)
+
+    container.Position = UDim2.new(0.5, 0, 1.1, 0)
+
+    container.Size = UDim2.fromOffset(0, 58) 
+
+    container.AutomaticSize = Enum.AutomaticSize.X
+
+    container.BackgroundColor3 = Color3.fromRGB(255, 20, 110)
+
+    container.BorderSizePixel = 0
+
+    container.Parent = screenGui
+
+    
+
+    local corner = Instance.new("UICorner")
+
+    corner.CornerRadius = UDim.new(1, 0)
+
+    corner.Parent = container
+
+    
+
+    local padding = Instance.new("UIPadding")
+
+    padding.PaddingLeft = UDim.new(0, 30)
+
+    padding.PaddingRight = UDim.new(0, 30)
+
+    padding.PaddingTop = UDim.new(0, 12)
+
+    padding.PaddingBottom = UDim.new(0, 12)
+
+    padding.Parent = container
+
+    local layout = Instance.new("UIListLayout")
+
+    layout.FillDirection = Enum.FillDirection.Horizontal
+
+    layout.VerticalAlignment = Enum.VerticalAlignment.Center
+
+    layout.HorizontalAlignment = Enum.HorizontalAlignment.Center
+
+    layout.Padding = UDim.new(0, 10)
+
+    layout.SortOrder = Enum.SortOrder.LayoutOrder
+
+    layout.Parent = container
+
+    
+
+    local icon = Instance.new("ImageLabel")
+
+    icon.Image = "rbxassetid://15047358527" 
+
+    icon.ImageColor3 = Color3.new(1, 1, 1) 
+
+    icon.Size = UDim2.fromOffset(26, 26) 
+
+    icon.BackgroundTransparency = 1
+
+    icon.LayoutOrder = 1
+
+    icon.Parent = container
+
+    
+
+    local textLabel = Instance.new("TextLabel")
+
+    textLabel.Text = "sent gift!"
+
+    textLabel.Font = Enum.Font.GothamBlack
+
+    textLabel.TextSize = 24 
+
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+
+    textLabel.BackgroundTransparency = 1
+
+    textLabel.AutomaticSize = Enum.AutomaticSize.XY
+
+    textLabel.LayoutOrder = 2
+
+    textLabel.Parent = container
+
+    
+
+    local tweenInfo = TweenInfo.new(0.5, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+
+    local tweenIn = TweenService:Create(container, tweenInfo, {Position = UDim2.new(0.5, 0, 0.9, 0)})
+
+    tweenIn:Play()
+
+    
+
+    task.delay(3, function()
+
+        if container.Parent then
+
+            local tweenOut = TweenService:Create(container, tweenInfo, {Position = UDim2.new(0.5, 0, 1.1, 0)})
+
+            tweenOut:Play()
+
+            tweenOut.Completed:Connect(function()
+
+                container:Destroy()
+
             end)
-            task.wait(SPAWN_DELAY)
+
         end
-    end
+
+    end)
+
 end
 
-local function runDonateVisualNow()
-    task.spawn(function()
-        if PUSH_FIRST then
-            pushAllToMyLastPosition(PUSH_DURATION, PUSH_INTERVAL, NEAR_RADIUS)
-        end
-        spawnMultiDonations()
-        showRobuxSummary(totalDonatedVisual)
+-------------------------------------------------------------------------
+-- PURCHASE COMPLETED MODAL
+-------------------------------------------------------------------------
+
+local function showPurchaseCompleted(productInfo, amount)
+    playSound("Purchase", 1)
+    local gui = Instance.new("ScreenGui")
+    gui.Parent = playerGui
+    gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+gui.IgnoreGuiInset = true  -- move it here
+-- Dim overlay behind modal
+local overlay = Instance.new("Frame")
+overlay.Size = UDim2.new(1, 0, 1, 50)
+overlay.Position = UDim2.new(0, 0, 0, -50)
+overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+overlay.BackgroundTransparency = 0.45
+overlay.BorderSizePixel = 0
+overlay.ZIndex = 1
+overlay.Parent = gui
+
+
+    -- Modal — slightly taller to give circle room, matching screenshot proportions
+    local modal = Instance.new("Frame")
+    modal.Size = UDim2.fromOffset(460, 268)
+    modal.Position = UDim2.fromScale(0.5, 0.5)
+    modal.AnchorPoint = Vector2.new(0.5, 0.5)
+    modal.BackgroundColor3 = Color3.fromRGB(20, 21, 26)
+    modal.BorderSizePixel = 0
+    modal.ZIndex = 2
+    modal.Parent = gui
+    Instance.new("UICorner", modal).CornerRadius = UDim.new(0, 16)
+
+    -- Subtle outer border
+    local modalStroke = Instance.new("UIStroke")
+    modalStroke.Color = Color3.fromRGB(255, 255, 255)
+    modalStroke.Transparency = 0.88
+    modalStroke.Thickness = 1
+    modalStroke.Parent = modal
+
+    -- Title — slightly off-white, not pure white (matches screenshot)
+    local title = Instance.new("TextLabel")
+    title.Text = "Purchase completed"
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 19
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.Position = UDim2.fromOffset(22, 18)
+    title.Size = UDim2.new(1, -60, 0, 28)
+    title.TextColor3 = Color3.fromRGB(215, 217, 222)
+    title.BackgroundTransparency = 1
+    title.ZIndex = 3
+    title.Parent = modal
+
+    -- Thin divider under title
+    local divider = Instance.new("Frame")
+    divider.Size = UDim2.new(1, -44, 0, 1)
+    divider.Position = UDim2.fromOffset(22, 56)
+    divider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    divider.BackgroundTransparency = 0.88
+    divider.BorderSizePixel = 0
+    divider.ZIndex = 3
+    divider.Parent = modal
+
+    -- Close X — no background, plain text, top right (native Roblox)
+    local close = Instance.new("TextButton")
+    close.Position = UDim2.new(1, -14, 0, 16)
+    close.AnchorPoint = Vector2.new(1, 0)
+    close.Size = UDim2.fromOffset(28, 28)
+    close.Text = "X"
+    close.Font = Enum.Font.GothamBold
+    close.TextSize = 16
+    close.BackgroundTransparency = 1
+    close.TextColor3 = Color3.fromRGB(185, 188, 200)
+    close.ZIndex = 4
+    close.Parent = modal
+
+    close.MouseButton1Click:Connect(function()
+        gui:Destroy()
+        showSentGiftNotification()
+    end)
+
+    -- Circle: dark-filled (same bg as modal), thick bright white stroke
+    -- Centered horizontally, below the divider
+    local iconContainer = Instance.new("Frame")
+    iconContainer.Size = UDim2.fromOffset(72, 72)
+    iconContainer.Position = UDim2.new(0.5, 0, 0, 64)
+    iconContainer.AnchorPoint = Vector2.new(0.5, 0)
+    iconContainer.BackgroundColor3 = Color3.fromRGB(20, 21, 26)
+    iconContainer.BorderSizePixel = 0
+    iconContainer.ZIndex = 3
+    iconContainer.Parent = modal
+    Instance.new("UICorner", iconContainer).CornerRadius = UDim.new(1, 0)
+
+    local circleStroke = Instance.new("UIStroke")
+    circleStroke.Color = Color3.fromRGB(235, 237, 242)
+    circleStroke.Transparency = 0
+    circleStroke.Thickness = 3
+    circleStroke.Parent = iconContainer
+
+    local checkmark = Instance.new("ImageLabel")
+    checkmark.Size = UDim2.fromOffset(40, 40)
+    checkmark.Position = UDim2.fromScale(0.5, 0.5)
+    checkmark.AnchorPoint = Vector2.new(0.5, 0.5)
+    checkmark.BackgroundTransparency = 1
+    checkmark.Image = "rbxassetid://3944680095"
+    checkmark.ImageColor3 = Color3.fromRGB(235, 237, 242)
+    checkmark.ZIndex = 4
+    checkmark.Parent = iconContainer
+
+    local desc = Instance.new("TextLabel")
+    desc.Text = "You have successfully bought " .. productInfo.Name .. "."
+    desc.Font = Enum.Font.GothamMedium
+    desc.TextSize = 14
+    desc.TextWrapped = true
+    desc.Position = UDim2.fromOffset(22, 148)
+    desc.Size = UDim2.new(1, -44, 0, 36)
+    desc.TextXAlignment = Enum.TextXAlignment.Center
+    desc.TextYAlignment = Enum.TextYAlignment.Center
+    desc.TextColor3 = Color3.fromRGB(168, 172, 185)
+    desc.BackgroundTransparency = 1
+    desc.ZIndex = 3
+    desc.Parent = modal
+
+    local ok = Instance.new("TextButton")
+    ok.Size = UDim2.new(1, -44, 0, 42)
+    ok.Position = UDim2.fromOffset(22, 208)
+    ok.Text = "OK"
+    ok.Font = Enum.Font.GothamBold
+    ok.TextSize = 15
+    ok.BackgroundColor3 = Color3.fromRGB(72, 104, 235)
+    ok.TextColor3 = Color3.new(1, 1, 1)
+    ok.AutoButtonColor = false
+    ok.ZIndex = 3
+    ok.Parent = modal
+    Instance.new("UICorner", ok).CornerRadius = UDim.new(0, 8)
+
+    ok.MouseButton1Click:Connect(function()
+        gui:Destroy()
+        showSentGiftNotification()
     end)
 end
 
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "MozilHubV4"
-ScreenGui.Parent = PlayerGui
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+-------------------------------------------------------------------------
+-- BUY ITEM MODAL
+-------------------------------------------------------------------------
 
-local ToggleButton = Instance.new("ImageButton")
-ToggleButton.Name = "ToggleButton"
-ToggleButton.Parent = ScreenGui
-ToggleButton.BackgroundTransparency = 1
-ToggleButton.Image = "rbxassetid://81767899440204"
-ToggleButton.Size = UDim2.new(0, 50, 0, 50)
-ToggleButton.Position = UDim2.new(0, 20, 0.5, -25)
-ToggleButton.Draggable = true
+local function createPurchaseModal(donationAmount, recipientUsername, productInfo)
+    playSound("Click", 0.7)
+    local parsedRobux = parseNumber(tostring(donationAmount)) or 100
+    local newBalance = currentBalance - parsedRobux
 
-local ToggleButtonCorner = Instance.new("UICorner")
-ToggleButtonCorner.CornerRadius = UDim.new(0, 12)
-ToggleButtonCorner.Parent = ToggleButton
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "PurchaseModal"
+    screenGui.Parent = playerGui
+    screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.IgnoreGuiInset = true  -- move it here
+    -- Dim overlay
+local overlay = Instance.new("Frame")
+overlay.Size = UDim2.new(1, 0, 1, 50)
+overlay.Position = UDim2.new(0, 0, 0, -50)
+overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+overlay.BackgroundTransparency = 0.45
+overlay.BorderSizePixel = 0
+overlay.ZIndex = 1
+overlay.Parent = screenGui
 
-local MainFrame = Instance.new("Frame")
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
-MainFrame.BorderSizePixel = 0
-MainFrame.Position = UDim2.new(0.5, -150, 0.5, -125)
-MainFrame.Size = UDim2.new(0, 300, 0, 250)
-MainFrame.Visible = false
-MainFrame.Active = true
-MainFrame.Draggable = true
+    local modal = Instance.new("Frame")
+    modal.Size = UDim2.fromOffset(460, 240)
+    modal.Position = UDim2.fromScale(0.5, 0.5)
+    modal.AnchorPoint = Vector2.new(0.5, 0.5)
+    modal.BackgroundColor3 = Color3.fromRGB(20, 21, 26)
+    modal.BorderSizePixel = 0
+    modal.ZIndex = 2
+    modal.Parent = screenGui
+    Instance.new("UICorner", modal).CornerRadius = UDim.new(0, 16)
 
-local MainFrameCorner = Instance.new("UICorner")
-MainFrameCorner.CornerRadius = UDim.new(0, 12)
-MainFrameCorner.Parent = MainFrame
+    -- Outer border
+    local stroke = Instance.new("UIStroke")
+    stroke.Color = Color3.fromRGB(255, 255, 255)
+    stroke.Transparency = 0.88
+    stroke.Thickness = 1
+    stroke.Parent = modal
 
-local TitleLabel = Instance.new("TextLabel")
-TitleLabel.Name = "TitleLabel"
-TitleLabel.Parent = MainFrame
-TitleLabel.BackgroundTransparency = 1
-TitleLabel.Position = UDim2.new(0, 0, 0, 10)
-TitleLabel.Size = UDim2.new(1, 0, 0, 30)
-TitleLabel.Font = Enum.Font.GothamBold
-TitleLabel.Text = "MOZIL HUB V4"
-TitleLabel.TextColor3 = Color3.new(1, 1, 1)
-TitleLabel.TextSize = 24
-TitleLabel.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
-TitleLabel.TextStrokeTransparency = 0
+    -- Title
+    local title = Instance.new("TextLabel")
+    title.Position = UDim2.fromOffset(22, 18)
+    title.Size = UDim2.new(1, -60, 0, 26)
+    title.Text = "Buy Item"
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 19
+    title.TextXAlignment = Enum.TextXAlignment.Left
+    title.BackgroundTransparency = 1
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.ZIndex = 3
+    title.Parent = modal
 
-local SubtitleLabel = Instance.new("TextLabel")
-SubtitleLabel.Name = "SubtitleLabel"
-SubtitleLabel.Parent = MainFrame
-SubtitleLabel.BackgroundTransparency = 1
-SubtitleLabel.Position = UDim2.new(0, 0, 0, 40)
-SubtitleLabel.Size = UDim2.new(1, 0, 0, 20)
-SubtitleLabel.Font = Enum.Font.Gotham
-SubtitleLabel.Text = "Pls Donate - Robux Stealer"
-SubtitleLabel.TextColor3 = Color3.fromRGB(0, 255, 0)
-SubtitleLabel.TextSize = 14
-SubtitleLabel.TextStrokeColor3 = Color3.new(0, 0, 0)
-SubtitleLabel.TextStrokeTransparency = 0
+    -- Balance display (no background pill, just icon + number, native Roblox style)
+    local balance = Instance.new("Frame")
+    balance.Position = UDim2.new(1, -54, 0, 19)
+    balance.AnchorPoint = Vector2.new(1, 0)
+    balance.Size = UDim2.fromOffset(0, 22)
+    balance.AutomaticSize = Enum.AutomaticSize.X
+    balance.BackgroundTransparency = 1
+    balance.ZIndex = 3
+    balance.Parent = modal
 
-local StealRobuxButton = Instance.new("TextButton")
-StealRobuxButton.Name = "StealRobuxButton"
-StealRobuxButton.Parent = MainFrame
-StealRobuxButton.BackgroundColor3 = Color3.fromRGB(0, 200, 0)
-StealRobuxButton.BorderColor3 = Color3.new(0, 0, 0)
-StealRobuxButton.Position = UDim2.new(0.1, 0, 0.3, 0)
-StealRobuxButton.Size = UDim2.new(0.8, 0, 0.15, 0)
-StealRobuxButton.Font = Enum.Font.GothamBold
-StealRobuxButton.Text = "STEAL ROBUX"
-StealRobuxButton.TextColor3 = Color3.new(1, 1, 1)
-StealRobuxButton.TextSize = 18
-StealRobuxButton.TextStrokeColor3 = Color3.new(0, 0, 0)
-StealRobuxButton.TextStrokeTransparency = 0
+    local bIcon = Instance.new("ImageLabel")
+    bIcon.Size = UDim2.fromOffset(18, 18)
+    bIcon.Position = UDim2.fromOffset(0, 2)
+    bIcon.Image = "rbxasset://textures/ui/common/robux@3x.png"
+    bIcon.BackgroundTransparency = 1
+    bIcon.ZIndex = 4
+    bIcon.Parent = balance
 
-local StealRobuxCorner = Instance.new("UICorner")
-StealRobuxCorner.CornerRadius = UDim.new(0, 8)
-StealRobuxCorner.Parent = StealRobuxButton
+    local bText = Instance.new("TextLabel")
+    bText.Position = UDim2.fromOffset(22, 0)
+    bText.Size = UDim2.new(0, 0, 1, 0)
+    bText.AutomaticSize = Enum.AutomaticSize.X
+    bText.Text = formatNumber(currentBalance)
+    bText.Font = Enum.Font.GothamBold
+    bText.TextSize = 14
+    bText.TextXAlignment = Enum.TextXAlignment.Left
+    bText.BackgroundTransparency = 1
+    bText.TextColor3 = Color3.fromRGB(230, 235, 245)
+    bText.ZIndex = 4
+    bText.Parent = balance
 
-local RichSvHopButton = Instance.new("TextButton")
-RichSvHopButton.Name = "RichSvHopButton"
-RichSvHopButton.Parent = MainFrame
-RichSvHopButton.BackgroundColor3 = Color3.fromRGB(0, 100, 255)
-RichSvHopButton.BorderColor3 = Color3.new(0, 0, 0)
-RichSvHopButton.Position = UDim2.new(0.1, 0, 0.5, 0)
-RichSvHopButton.Size = UDim2.new(0.8, 0, 0.15, 0)
-RichSvHopButton.Font = Enum.Font.GothamBold
-RichSvHopButton.Text = "RICH SV HOP"
-RichSvHopButton.TextColor3 = Color3.new(1, 1, 1)
-RichSvHopButton.TextSize = 18
-RichSvHopButton.TextStrokeColor3 = Color3.new(0, 0, 0)
-RichSvHopButton.TextStrokeTransparency = 0
+    -- Close button (no background, plain X - native Roblox style)
+    local close = Instance.new("TextButton")
+    close.Position = UDim2.new(1, -14, 0, 16)
+    close.AnchorPoint = Vector2.new(1, 0)
+    close.Size = UDim2.fromOffset(28, 28)
+    close.Text = "X"
+    close.Font = Enum.Font.GothamBold
+    close.TextSize = 16
+    close.BackgroundTransparency = 1
+    close.TextColor3 = Color3.fromRGB(200, 200, 200)
+    close.ZIndex = 4
+    close.Parent = modal
 
-local RichSvHopCorner = Instance.new("UICorner")
-RichSvHopCorner.CornerRadius = UDim.new(0, 8)
-RichSvHopCorner.Parent = RichSvHopButton
+    close.MouseButton1Click:Connect(function() screenGui:Destroy() end)
 
-local CreatorLabel = Instance.new("TextLabel")
-CreatorLabel.Name = "CreatorLabel"
-CreatorLabel.Parent = MainFrame
-CreatorLabel.BackgroundTransparency = 1
-CreatorLabel.Position = UDim2.new(0, 0, 0.8, 0)
-CreatorLabel.Size = UDim2.new(1, 0, 0, 20)
-CreatorLabel.Font = Enum.Font.Gotham
-CreatorLabel.Text = "Made by MozilOnTop"
-CreatorLabel.TextColor3 = Color3.new(1, 1, 1)
-CreatorLabel.TextSize = 14
+    -- Divider under title
+    local divider = Instance.new("Frame")
+    divider.Size = UDim2.new(1, -44, 0, 1)
+    divider.Position = UDim2.fromOffset(22, 54)
+    divider.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    divider.BackgroundTransparency = 0.9
+    divider.BorderSizePixel = 0
+    divider.ZIndex = 3
+    divider.Parent = modal
 
-local RainbowLabel = Instance.new("TextLabel")
-RainbowLabel.Name = "RainbowLabel"
-RainbowLabel.Parent = MainFrame
-RainbowLabel.BackgroundTransparency = 1
-RainbowLabel.Position = UDim2.new(0, 0, 0.87, 0)
-RainbowLabel.Size = UDim2.new(1, 0, 0, 20)
-RainbowLabel.Font = Enum.Font.Gotham
-RainbowLabel.Text = "Only Steal 10 Servers Per A Day"
-RainbowLabel.TextSize = 14
+    -- Product row
+    local row = Instance.new("Frame")
+    row.Position = UDim2.fromOffset(22, 66)
+    row.Size = UDim2.new(1, -44, 0, 76)
+    row.BackgroundTransparency = 1
+    row.ZIndex = 3
+    row.Parent = modal
 
-spawn(function()
-    while RainbowLabel and RainbowLabel.Parent do
-        for i = 0, 1, 0.01 do
-            if not RainbowLabel or not RainbowLabel.Parent then
-                break
-            end
-            RainbowLabel.TextColor3 = Color3.fromHSV(i, 1, 1)
-            task.wait(0.05)
+    -- Product icon with dark card background
+    local iconBg = Instance.new("Frame")
+    iconBg.Size = UDim2.fromOffset(72, 72)
+    iconBg.Position = UDim2.fromOffset(0, 2)
+    iconBg.BackgroundColor3 = Color3.fromRGB(35, 37, 45)
+    iconBg.BorderSizePixel = 0
+    iconBg.ZIndex = 3
+    iconBg.Parent = row
+    Instance.new("UICorner", iconBg).CornerRadius = UDim.new(0, 10)
+
+    local iconBgStroke = Instance.new("UIStroke")
+    iconBgStroke.Color = Color3.fromRGB(255, 255, 255)
+    iconBgStroke.Transparency = 0.88
+    iconBgStroke.Thickness = 1
+    iconBgStroke.Parent = iconBg
+
+    local icon = Instance.new("ImageLabel")
+    icon.Size = UDim2.fromOffset(58, 58)
+    icon.Position = UDim2.fromScale(0.5, 0.5)
+    icon.AnchorPoint = Vector2.new(0.5, 0.5)
+    icon.BackgroundTransparency = 1
+    icon.Image = "rbxthumb://type=GamePass&id=" .. productInfo.IconImageAssetId .. "&w=150&h=150"
+    icon.ZIndex = 4
+    icon.Parent = iconBg
+    Instance.new("UICorner", icon).CornerRadius = UDim.new(0, 6)
+
+    -- Text column
+    local textCol = Instance.new("Frame")
+    textCol.Position = UDim2.fromOffset(86, 0)
+    textCol.Size = UDim2.new(1, -86, 1, 0)
+    textCol.BackgroundTransparency = 1
+    textCol.ZIndex = 3
+    textCol.Parent = row
+
+    local name = Instance.new("TextLabel")
+    name.Position = UDim2.fromOffset(0, 10)
+    name.Size = UDim2.new(1, 0, 0, 22)
+    name.Text = productInfo.Name
+    name.Font = Enum.Font.GothamBold
+    name.TextSize = 17
+    name.TextXAlignment = Enum.TextXAlignment.Left
+    name.BackgroundTransparency = 1
+    name.TextColor3 = Color3.fromRGB(255, 255, 255)
+    name.ZIndex = 4
+    name.Parent = textCol
+
+    -- Subtle "item" label
+    local typeLabel = Instance.new("TextLabel")
+    typeLabel.Position = UDim2.fromOffset(0, 34)
+    typeLabel.Size = UDim2.new(1, 0, 0, 16)
+    typeLabel.Text = "Game Pass"
+    typeLabel.Font = Enum.Font.Gotham
+    typeLabel.TextSize = 12
+    typeLabel.TextXAlignment = Enum.TextXAlignment.Left
+    typeLabel.BackgroundTransparency = 1
+    typeLabel.TextColor3 = Color3.fromRGB(120, 125, 145)
+    typeLabel.ZIndex = 4
+    typeLabel.Parent = textCol
+
+    -- Price row
+    local priceRow = Instance.new("Frame")
+    priceRow.Position = UDim2.fromOffset(0, 52)
+    priceRow.Size = UDim2.fromOffset(120, 20)
+    priceRow.BackgroundTransparency = 1
+    priceRow.ZIndex = 3
+    priceRow.Parent = textCol
+
+    local robuxIcon = Instance.new("ImageLabel")
+    robuxIcon.Size = UDim2.fromOffset(18, 18)
+    robuxIcon.Position = UDim2.fromOffset(0, 1)
+    robuxIcon.Image = "rbxasset://textures/ui/common/robux@3x.png"
+    robuxIcon.BackgroundTransparency = 1
+    robuxIcon.ZIndex = 4
+    robuxIcon.Parent = priceRow
+
+    local priceLabel = Instance.new("TextLabel")
+    priceLabel.Position = UDim2.fromOffset(22, 0)
+    priceLabel.Size = UDim2.new(1, -22, 1, 0)
+    priceLabel.Text = formatNumber(parsedRobux)
+    priceLabel.Font = Enum.Font.GothamBold
+    priceLabel.TextSize = 16
+    priceLabel.TextXAlignment = Enum.TextXAlignment.Left
+    priceLabel.BackgroundTransparency = 1
+    priceLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+    priceLabel.ZIndex = 4
+    priceLabel.Parent = priceRow
+
+    -- Buy button container (logic fully preserved)
+    local buyButton = Instance.new("TextButton")
+    buyButton.Name = "BuyButtonContainer"
+    buyButton.Position = UDim2.fromOffset(22, 186)
+    buyButton.Size = UDim2.new(1, -44, 0, 40)
+    buyButton.BackgroundColor3 = Color3.fromRGB(36, 60, 160)
+    buyButton.AutoButtonColor = false
+    buyButton.Text = ""
+    buyButton.Active = false
+    buyButton.ZIndex = 3
+    buyButton.Parent = modal
+    Instance.new("UICorner", buyButton).CornerRadius = UDim.new(0, 8)
+
+    local buyStroke = Instance.new("UIStroke")
+    buyStroke.Color = Color3.fromRGB(66, 99, 245)
+    buyStroke.Transparency = 0.7
+    buyStroke.Thickness = 1
+    buyStroke.Parent = buyButton
+
+    local filler = Instance.new("Frame")
+    filler.Size = UDim2.new(0, 0, 1, 0)
+    filler.BackgroundColor3 = Color3.fromRGB(66, 99, 245)
+    filler.BorderSizePixel = 0
+    filler.ZIndex = 4
+    filler.Parent = buyButton
+    Instance.new("UICorner", filler).CornerRadius = UDim.new(0, 8)
+
+    local btnLabel = Instance.new("TextLabel")
+    btnLabel.Size = UDim2.new(1, 0, 1, 0)
+    btnLabel.BackgroundTransparency = 1
+    btnLabel.Text = "Buy"
+    btnLabel.Font = Enum.Font.GothamBold
+    btnLabel.TextSize = 15
+    btnLabel.TextColor3 = Color3.new(1, 1, 1)
+    btnLabel.ZIndex = 5
+    btnLabel.Parent = buyButton
+
+    modal.Position = UDim2.fromScale(0.5, 0.4)
+    modal:TweenPosition(UDim2.fromScale(0.5, 0.5), Enum.EasingDirection.Out, Enum.EasingStyle.Back, 0.5, true)
+
+    task.spawn(function()
+        task.wait(0.5)
+        if not filler or not filler.Parent then return end
+        local tweenInfo = TweenInfo.new(3.0, Enum.EasingStyle.Quad, Enum.EasingDirection.In)
+        local tween = TweenService:Create(filler, tweenInfo, {Size = UDim2.new(1, 0, 1, 0)})
+        tween:Play()
+        tween.Completed:Wait()
+        if not buyButton or not buyButton.Parent then return end
+        buyButton.Active = true
+    end)
+
+    buyButton.MouseButton1Click:Connect(function()
+        currentBalance = newBalance
+        updateDonatedValue(parsedRobux)
+        screenGui:Destroy()
+        task.wait(0.3)
+        showPurchaseCompleted(productInfo, parsedRobux)
+    end)
+end
+-- Hook booth buttons (better system from reference script)
+
+local function hookBoothButton(btn)
+
+    if not (btn:IsA("TextButton") or btn:IsA("ImageButton")) then return end
+
+    if btn:FindFirstChild("CustomPurchaseOverlay") then return end
+
+    local id = getButtonId(btn)
+
+    if not id then return end
+
+    -- Disable original connections
+
+    if getconnections then
+
+        for _, eventName in ipairs({"MouseButton1Click", "Activated"}) do
+
+            pcall(function()
+
+                for _, conn in ipairs(getconnections(btn[eventName])) do
+
+                    if conn.Function then
+
+                        pcall(function()
+
+                            conn:Disable()
+
+                        end)
+
+                    end
+
+                end
+
+            end)
+
         end
+
+    end
+
+    local overlay = Instance.new("TextButton")
+
+    overlay.Name = "CustomPurchaseOverlay"
+
+    overlay.BackgroundTransparency = 1
+
+    overlay.Text = ""
+
+    overlay.Size = UDim2.new(1, 0, 1, 0)
+
+    overlay.ZIndex = (btn.ZIndex or 1) + 10 
+
+    overlay.Parent = btn
+
+    overlay.MouseButton1Click:Connect(function()
+
+        local currentId = getButtonId(btn) or id
+
+        local productInfo = getProductInfo(currentId)
+
+        local boothUsername = getUsernameFromBoothItem(btn) or username
+
+        
+
+        warn("Fetched gamepass:", productInfo.Name, "| ID:", currentId)
+
+        createPurchaseModal(productInfo.PriceInRobux, boothUsername, productInfo)
+
+    end)
+
+end
+
+local function checkAndHook(obj)
+
+    task.delay(0.1, function()
+
+        if obj and obj.Parent then
+
+            hookBoothButton(obj)
+
+        end
+
+    end)
+
+end
+
+-- Hook existing buttons
+
+for _, v in ipairs(playerGui:GetDescendants()) do
+
+    checkAndHook(v)
+
+end
+
+-- Hook new buttons as they're added
+
+playerGui.DescendantAdded:Connect(function(descendant)
+
+    checkAndHook(descendant)
+
+end)
+
+-- Also hook the metamethod as backup
+
+pcall(function()
+
+    local old
+
+    old = hookmetamethod(game, "__namecall", newcclosure(function(self, ...)
+
+        local method = getnamecallmethod()
+
+        if self == MarketplaceService and (method == "PromptGamePassPurchase" or method == "PromptProductPurchase" or method == "PromptPurchase") then
+
+            return
+
+        end
+
+        return old(self, ...)
+
+    end))
+
+end)
+
+--[[
+    ╔══════════════════════════════╗
+    ║        NATHAN HUB            ║
+    ╚══════════════════════════════╝
+    currentBalance lives in parent scope — not redeclared here.
+    ResetOnSpawn = false → hub survives avatar resets.
+]]
+
+-- ─────────────────────────────────────────────
+-- SERVICES
+-- ─────────────────────────────────────────────
+local Players          = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService     = game:GetService("TweenService")
+
+local LP        = Players.LocalPlayer
+local playerGui = LP:WaitForChild("PlayerGui")
+
+
+-- ─────────────────────────────────────────────
+-- NAME TAG  (baked in)
+-- ─────────────────────────────────────────────
+local CUSTOM_NAME      = LP.DisplayName
+local badgeVisible     = true
+local vipVisible       = true
+local verifiedVisible  = true
+local ownerMode        = false   -- false = "Developer"  true = "Owner | Dev"
+
+local activeBadges     = {}   -- dev badge frames
+local activeDevLabels  = {}   -- dev text labels (for owner mode text swap)
+local activeVip        = {}   -- vip badge frames
+local activeVerified   = {}   -- verified containers
+
+local function makeBadge(parent, text, color, zBase)
+    local frame               = Instance.new("Frame")
+    frame.AutomaticSize       = Enum.AutomaticSize.X
+    frame.Size                = UDim2.new(0, 0, 0, 20)
+    frame.BackgroundColor3    = color
+    frame.BackgroundTransparency = 0.02
+    frame.BorderSizePixel     = 0
+    frame.ZIndex              = zBase
+    frame.Parent              = parent
+
+    Instance.new("UICorner", frame).CornerRadius = UDim.new(1, 0)
+
+    local pad              = Instance.new("UIPadding", frame)
+    pad.PaddingLeft        = UDim.new(0, 9)
+    pad.PaddingRight       = UDim.new(0, 9)
+
+    local lbl              = Instance.new("TextLabel")
+    lbl.AutomaticSize      = Enum.AutomaticSize.X
+    lbl.Size               = UDim2.new(0, 0, 1, 0)
+    lbl.BackgroundTransparency = 1
+    lbl.Text               = text
+    lbl.TextColor3         = Color3.fromRGB(255, 255, 255)
+    lbl.TextSize           = 11
+    lbl.Font               = Enum.Font.GothamBold
+    lbl.TextXAlignment     = Enum.TextXAlignment.Center
+    lbl.ZIndex             = zBase + 1
+    lbl.Parent             = frame
+
+    return frame, lbl
+end
+
+local function applyNameTag(character)
+    local head     = character:WaitForChild("Head")
+    local humanoid = character:WaitForChild("Humanoid")
+    humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+
+    if head:FindFirstChild("CustomNameTag") then
+        head.CustomNameTag:Destroy()
+    end
+
+    local billboard                   = Instance.new("BillboardGui")
+    billboard.Name                    = "CustomNameTag"
+    billboard.Size                    = UDim2.new(0, 240, 0, 65)
+    -- StudsOffsetWorldSpace = always straight up in world space
+    -- like a rigid string from the top of the head no matter how the character tilts
+    billboard.StudsOffsetWorldSpace   = Vector3.new(0, 3.2, 0)
+    billboard.AlwaysOnTop             = true
+    billboard.LightInfluence          = 0
+    billboard.Parent                  = head
+
+    -- Badge row (Dev + VIP side by side, centered)
+    local badgeRow                    = Instance.new("Frame")
+    badgeRow.AutomaticSize            = Enum.AutomaticSize.X
+    badgeRow.Size                     = UDim2.new(0, 0, 0, 20)
+    badgeRow.Position                 = UDim2.new(0.5, 0, 0, 8)   -- lowered toward name
+    badgeRow.AnchorPoint              = Vector2.new(0.5, 0)
+    badgeRow.BackgroundTransparency   = 1
+    badgeRow.ZIndex                   = 4
+    badgeRow.Parent                   = billboard
+
+    local bList                       = Instance.new("UIListLayout")
+    bList.FillDirection               = Enum.FillDirection.Horizontal
+    bList.HorizontalAlignment         = Enum.HorizontalAlignment.Center
+    bList.VerticalAlignment           = Enum.VerticalAlignment.Center
+    bList.SortOrder                   = Enum.SortOrder.LayoutOrder
+    bList.Padding                     = UDim.new(0, 4)
+    bList.Parent                      = badgeRow
+
+    -- Developer badge  (#ff4647)
+    local devFrame, devLbl = makeBadge(badgeRow,
+        ownerMode and "Owner | Dev" or "Developer",
+        Color3.fromRGB(255, 70, 71), 5)
+    devFrame.LayoutOrder   = 1
+    devFrame.Visible       = badgeVisible
+    table.insert(activeBadges, devFrame)
+    table.insert(activeDevLabels, devLbl)
+
+    -- VIP badge  (#fea808)
+    local vipFrame, _ = makeBadge(badgeRow, "VIP",
+        Color3.fromRGB(254, 168, 8), 5)
+    vipFrame.LayoutOrder  = 2
+    vipFrame.Visible      = vipVisible
+    table.insert(activeVip, vipFrame)
+
+    -- Name row (verified + name label)
+    local nameRow                     = Instance.new("Frame")
+    nameRow.AutomaticSize             = Enum.AutomaticSize.XY
+    nameRow.Size                      = UDim2.new(0, 0, 0, 18)
+    nameRow.Position                  = UDim2.new(0.5, 0, 0, 32)
+    nameRow.AnchorPoint               = Vector2.new(0.5, 0)
+    nameRow.BackgroundTransparency    = 1
+    nameRow.ZIndex                    = 7
+    nameRow.ClipsDescendants          = false
+    nameRow.Parent                    = billboard
+
+    local nList                       = Instance.new("UIListLayout")
+    nList.FillDirection               = Enum.FillDirection.Horizontal
+    nList.VerticalAlignment           = Enum.VerticalAlignment.Center
+    nList.HorizontalAlignment         = Enum.HorizontalAlignment.Center
+    nList.SortOrder                   = Enum.SortOrder.LayoutOrder
+    nList.Padding                     = UDim.new(0, 3)
+    nList.Parent                      = nameRow
+
+    -- Verified badge (LayoutOrder 1)
+    local verifiedContainer           = Instance.new("Frame")
+    verifiedContainer.Name            = "VerifiedBadge"
+    verifiedContainer.Size            = UDim2.new(0, 16, 0, 16)
+    verifiedContainer.BackgroundTransparency = 1
+    verifiedContainer.LayoutOrder     = 1
+    verifiedContainer.ZIndex          = 8
+    verifiedContainer.Visible         = verifiedVisible
+    verifiedContainer.Parent          = nameRow
+    table.insert(activeVerified, verifiedContainer)
+
+    local blueSquare                  = Instance.new("Frame")
+    blueSquare.Size                   = UDim2.new(1, 0, 1, 0)
+    blueSquare.BackgroundColor3       = Color3.fromRGB(0, 120, 255)
+    blueSquare.BorderSizePixel        = 0
+    blueSquare.Rotation               = 13
+    blueSquare.ZIndex                 = 8
+    blueSquare.Parent                 = verifiedContainer
+    Instance.new("UICorner", blueSquare).CornerRadius = UDim.new(0.2, 0)
+
+    local legShort                    = Instance.new("Frame")
+    legShort.Size                     = UDim2.new(0, 5, 0, 2)
+    legShort.Position                 = UDim2.new(0.5, -4, 0.5, 1)
+    legShort.AnchorPoint              = Vector2.new(0, 0.5)
+    legShort.Rotation                 = 45
+    legShort.BackgroundColor3         = Color3.new(1, 1, 1)
+    legShort.BorderSizePixel          = 0
+    legShort.ZIndex                   = 9
+    legShort.Parent                   = blueSquare
+    Instance.new("UICorner", legShort).CornerRadius = UDim.new(1, 0)
+
+    local legLong                     = Instance.new("Frame")
+    legLong.Size                      = UDim2.new(0, 9, 0, 2)
+    legLong.Position                  = UDim2.new(0.5, -3, 0.5, 0)
+    legLong.AnchorPoint               = Vector2.new(0, 0.5)
+    legLong.Rotation                  = -50
+    legLong.BackgroundColor3          = Color3.new(1, 1, 1)
+    legLong.BorderSizePixel           = 0
+    legLong.ZIndex                    = 9
+    legLong.Parent                    = blueSquare
+    Instance.new("UICorner", legLong).CornerRadius = UDim.new(1, 0)
+
+    -- Name label (LayoutOrder 2)
+    local nameLabel                   = Instance.new("TextLabel")
+    nameLabel.AutomaticSize           = Enum.AutomaticSize.X
+    nameLabel.Size                    = UDim2.new(0, 0, 0, 18)
+    nameLabel.BackgroundTransparency  = 1
+    nameLabel.LayoutOrder             = 2
+    nameLabel.Text                    = CUSTOM_NAME
+    nameLabel.TextColor3              = Color3.fromRGB(255, 255, 255)
+    nameLabel.TextStrokeTransparency  = 0.55
+    nameLabel.TextStrokeColor3        = Color3.fromRGB(0, 0, 0)
+    nameLabel.TextSize                = 13
+    nameLabel.Font                    = Enum.Font.GothamMedium
+    nameLabel.TextXAlignment          = Enum.TextXAlignment.Left
+    nameLabel.ZIndex                  = 7
+    nameLabel.Parent                  = nameRow
+end
+
+if LP.Character then applyNameTag(LP.Character) end
+LP.CharacterAdded:Connect(applyNameTag)
+
+-- ─────────────────────────────────────────────
+-- TWEEN HELPERS
+-- ─────────────────────────────────────────────
+local function tween(obj, props, t, style, dir)
+    TweenService:Create(
+        obj,
+        TweenInfo.new(t or 0.2, style or Enum.EasingStyle.Quad, dir or Enum.EasingDirection.Out),
+        props
+    ):Play()
+end
+
+local function pulse(btn, normalColor, hoverColor)
+    btn.MouseEnter:Connect(function()
+        tween(btn, { BackgroundColor3 = hoverColor }, 0.13)
+    end)
+    btn.MouseLeave:Connect(function()
+        tween(btn, { BackgroundColor3 = normalColor }, 0.13)
+    end)
+end
+
+
+-- ─────────────────────────────────────────────
+-- JIGGLE ON CLICK
+-- ─────────────────────────────────────────────
+local function jiggle(btn)
+    btn.MouseButton1Click:Connect(function()
+        tween(btn, { Rotation =  4 }, 0.06, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+        task.delay(0.06, function()
+            tween(btn, { Rotation = -4 }, 0.06, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+            task.delay(0.06, function()
+                tween(btn, { Rotation =  2 }, 0.05, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+                task.delay(0.05, function()
+                    tween(btn, { Rotation =  0 }, 0.05, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+                end)
+            end)
+        end)
+    end)
+end
+
+-- ─────────────────────────────────────────────
+-- BUBBLE ANIMATION SIZES
+-- ─────────────────────────────────────────────
+local FULL_SIZE  = UDim2.new(0, 318, 0, 560)
+local SEED_SIZE  = UDim2.new(0, 48, 0, 48)   -- collapses to toggle size
+local isOpen     = true
+local isAnimating = false
+
+-- ─────────────────────────────────────────────
+-- MAIN GUI
+-- ─────────────────────────────────────────────
+local settingsGui          = Instance.new("ScreenGui")
+settingsGui.Name           = "SettingsGUI"
+settingsGui.Parent         = playerGui
+settingsGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+settingsGui.ResetOnSpawn   = false
+
+-- ─────────────────────────────────────────────
+-- TOGGLE BUTTON  [N]
+-- ─────────────────────────────────────────────
+local toggleBtn            = Instance.new("TextButton")
+toggleBtn.Name             = "HubToggle"
+toggleBtn.Size             = UDim2.new(0, 38, 0, 38)
+toggleBtn.Position         = UDim2.new(0, 10, 0, 10)
+toggleBtn.BackgroundColor3 = Color3.fromRGB(16, 14, 22)
+toggleBtn.Text             = "N"
+toggleBtn.TextColor3       = Color3.fromRGB(195, 160, 90)
+toggleBtn.Font             = Enum.Font.GothamBold
+toggleBtn.TextSize         = 17
+toggleBtn.AutoButtonColor  = false
+toggleBtn.ZIndex           = 10
+toggleBtn.Parent           = settingsGui
+
+Instance.new("UICorner", toggleBtn).CornerRadius = UDim.new(0, 9)
+
+local tStroke        = Instance.new("UIStroke", toggleBtn)
+tStroke.Color        = Color3.fromRGB(195, 160, 90)
+tStroke.Thickness    = 1.5
+tStroke.Transparency = 0.3
+
+pulse(toggleBtn, Color3.fromRGB(16, 14, 22), Color3.fromRGB(28, 24, 36))
+
+-- ─────────────────────────────────────────────
+-- MAIN FRAME
+-- ─────────────────────────────────────────────
+local settingsFrame               = Instance.new("Frame")
+settingsFrame.Name                = "SettingsFrame"
+settingsFrame.Size                = FULL_SIZE
+settingsFrame.Position            = UDim2.new(0, 58, 0, 10)
+settingsFrame.AnchorPoint         = Vector2.new(0, 0)
+settingsFrame.BackgroundColor3    = Color3.fromRGB(11, 10, 17)
+settingsFrame.BorderSizePixel     = 0
+settingsFrame.ClipsDescendants    = true
+settingsFrame.Visible             = true
+settingsFrame.Parent              = settingsGui
+
+Instance.new("UICorner", settingsFrame).CornerRadius = UDim.new(0, 16)
+
+local fStroke     = Instance.new("UIStroke", settingsFrame)
+fStroke.Color     = Color3.fromRGB(55, 48, 78)
+fStroke.Thickness = 1.2
+
+local fGrad    = Instance.new("UIGradient", settingsFrame)
+fGrad.Rotation = 140
+fGrad.Color    = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(18, 16, 28)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(9,  9,  15)),
+})
+
+-- ─────────────────────────────────────────────
+-- HEADER
+-- ─────────────────────────────────────────────
+local header               = Instance.new("Frame")
+header.Name                = "Header"
+header.Size                = UDim2.new(1, 0, 0, 64)
+header.BackgroundColor3    = Color3.fromRGB(17, 14, 28)
+header.BorderSizePixel     = 0
+header.ZIndex              = 2
+header.Parent              = settingsFrame
+
+Instance.new("UICorner", header).CornerRadius = UDim.new(0, 16)
+
+-- patch lower corners flat
+local headerPatch            = Instance.new("Frame")
+headerPatch.Size             = UDim2.new(1, 0, 0, 16)
+headerPatch.Position         = UDim2.new(0, 0, 1, -16)
+headerPatch.BackgroundColor3 = Color3.fromRGB(17, 14, 28)
+headerPatch.BorderSizePixel  = 0
+headerPatch.ZIndex           = 2
+headerPatch.Parent           = header
+
+local hGrad    = Instance.new("UIGradient", header)
+hGrad.Rotation = 90
+hGrad.Color    = ColorSequence.new({
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(26, 20, 44)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(17, 14, 28)),
+})
+
+-- gold accent line
+local accentLine            = Instance.new("Frame")
+accentLine.Size             = UDim2.new(0.5, 0, 0, 1)
+accentLine.Position         = UDim2.new(0.5, 0, 1, -1)
+accentLine.AnchorPoint      = Vector2.new(0.5, 0)
+accentLine.BackgroundColor3 = Color3.fromRGB(195, 155, 75)
+accentLine.BorderSizePixel  = 0
+accentLine.ZIndex           = 3
+accentLine.Parent           = header
+
+local aGrad = Instance.new("UIGradient", accentLine)
+aGrad.Color = ColorSequence.new({
+    ColorSequenceKeypoint.new(0,    Color3.fromRGB(11, 10, 17)),
+    ColorSequenceKeypoint.new(0.15, Color3.fromRGB(195, 155, 75)),
+    ColorSequenceKeypoint.new(0.85, Color3.fromRGB(195, 155, 75)),
+    ColorSequenceKeypoint.new(1,    Color3.fromRGB(11, 10, 17)),
+})
+
+local settingsTitle              = Instance.new("TextLabel")
+settingsTitle.Name               = "Title"
+settingsTitle.Size               = UDim2.new(1, -52, 1, 0)
+settingsTitle.Position           = UDim2.new(0, 16, 0, 0)
+settingsTitle.BackgroundTransparency = 1
+settingsTitle.Text               = "NATHAN HUB"
+settingsTitle.TextColor3         = Color3.fromRGB(225, 200, 145)
+settingsTitle.Font               = Enum.Font.GothamBold
+settingsTitle.TextSize           = 18
+settingsTitle.TextXAlignment     = Enum.TextXAlignment.Left
+settingsTitle.ZIndex             = 3
+settingsTitle.Parent             = header
+
+local subLabel                  = Instance.new("TextLabel")
+subLabel.Size                   = UDim2.new(1, -52, 0, 14)
+subLabel.Position               = UDim2.new(0, 17, 0, 36)
+subLabel.BackgroundTransparency = 1
+subLabel.Text                   = "SETTINGS"
+subLabel.TextColor3             = Color3.fromRGB(105, 90, 138)
+subLabel.Font                   = Enum.Font.GothamBold
+subLabel.TextSize               = 10
+subLabel.TextXAlignment         = Enum.TextXAlignment.Left
+subLabel.ZIndex                 = 3
+subLabel.Parent                 = header
+
+local closeBtn               = Instance.new("TextButton")
+closeBtn.Size                = UDim2.new(0, 28, 0, 28)
+closeBtn.Position            = UDim2.new(1, -78, 0.5, -14)   -- shifted left to make room
+closeBtn.BackgroundColor3    = Color3.fromRGB(55, 28, 36)
+closeBtn.Text                = "x"
+closeBtn.TextColor3          = Color3.fromRGB(210, 90, 100)
+closeBtn.Font                = Enum.Font.GothamBold
+closeBtn.TextSize            = 13
+closeBtn.AutoButtonColor     = false
+closeBtn.ZIndex              = 4
+closeBtn.Parent              = header
+
+Instance.new("UICorner", closeBtn).CornerRadius = UDim.new(0, 7)
+pulse(closeBtn, Color3.fromRGB(55, 28, 36), Color3.fromRGB(80, 36, 44))
+
+-- Hide N button
+local hideNBtn               = Instance.new("TextButton")
+hideNBtn.Size                = UDim2.new(0, 54, 0, 28)
+hideNBtn.Position            = UDim2.new(1, -46, 0.5, -14)
+hideNBtn.BackgroundColor3    = Color3.fromRGB(30, 26, 46)
+hideNBtn.Text                = "Hide N"
+hideNBtn.TextColor3          = Color3.fromRGB(160, 145, 200)
+hideNBtn.Font                = Enum.Font.GothamBold
+hideNBtn.TextSize            = 10
+hideNBtn.AutoButtonColor     = false
+hideNBtn.ZIndex              = 4
+hideNBtn.Parent              = header
+
+Instance.new("UICorner", hideNBtn).CornerRadius = UDim.new(0, 7)
+pulse(hideNBtn, Color3.fromRGB(30, 26, 46), Color3.fromRGB(45, 40, 65))
+
+local nHidden = false
+hideNBtn.MouseButton1Click:Connect(function()
+    nHidden = not nHidden
+    if nHidden then
+        toggleBtn.BackgroundTransparency = 1
+        toggleBtn.TextTransparency       = 1
+        tStroke.Transparency             = 1
+        hideNBtn.Text                    = "Show N"
+    else
+        toggleBtn.BackgroundTransparency = 0
+        toggleBtn.TextTransparency       = 0
+        tStroke.Transparency             = 0.3
+        hideNBtn.Text                    = "Hide N"
     end
 end)
 
-local CloseButton = Instance.new("TextButton")
-CloseButton.Name = "CloseButton"
-CloseButton.Parent = MainFrame
-CloseButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
-CloseButton.BorderColor3 = Color3.new(0, 0, 0)
-CloseButton.Position = UDim2.new(0.1, 0, 0.7, 0)
-CloseButton.Size = UDim2.new(0.8, 0, 0.1, 0)
-CloseButton.Font = Enum.Font.GothamBold
-CloseButton.Text = "CLOSE"
-CloseButton.TextColor3 = Color3.new(1, 1, 1)
-CloseButton.TextSize = 16
-CloseButton.TextStrokeColor3 = Color3.new(0, 0, 0)
-CloseButton.TextStrokeTransparency = 0
+-- ─────────────────────────────────────────────
+-- CONTENT AREA
+-- ─────────────────────────────────────────────
+local content                  = Instance.new("Frame")
+content.Name                   = "Content"
+content.Size                   = UDim2.new(1, -28, 1, -78)
+content.Position               = UDim2.new(0, 14, 0, 72)
+content.BackgroundTransparency = 1
+content.Parent                 = settingsFrame
 
-local CloseButtonCorner = Instance.new("UICorner")
-CloseButtonCorner.CornerRadius = UDim.new(0, 8)
-CloseButtonCorner.Parent = CloseButton
+-- ─────────────────────────────────────────────
+-- UI BUILDER HELPERS
+-- ─────────────────────────────────────────────
+local function makeSection(labelText, yPos)
+    local lbl                   = Instance.new("TextLabel")
+    lbl.Size                    = UDim2.new(1, 0, 0, 16)
+    lbl.Position                = UDim2.new(0, 2, 0, yPos)
+    lbl.BackgroundTransparency  = 1
+    lbl.Text                    = labelText
+    lbl.TextColor3              = Color3.fromRGB(115, 100, 150)
+    lbl.Font                    = Enum.Font.GothamBold
+    lbl.TextSize                = 11
+    lbl.TextXAlignment          = Enum.TextXAlignment.Left
+    lbl.ZIndex                  = 2
+    lbl.Parent                  = content
+    return lbl
+end
 
-ToggleButton.MouseButton1Click:Connect(function()
-    MainFrame.Visible = not MainFrame.Visible
+local function makeInput(placeholder, defaultText, yPos)
+    local box                   = Instance.new("TextBox")
+    box.Size                    = UDim2.new(1, 0, 0, 38)
+    box.Position                = UDim2.new(0, 0, 0, yPos)
+    box.BackgroundColor3        = Color3.fromRGB(20, 18, 30)
+    box.Text                    = defaultText
+    box.TextColor3              = Color3.fromRGB(220, 215, 240)
+    box.Font                    = Enum.Font.Gotham
+    box.TextSize                = 14
+    box.PlaceholderText         = placeholder
+    box.PlaceholderColor3       = Color3.fromRGB(80, 72, 108)
+    box.ClearTextOnFocus        = false
+    box.ZIndex                  = 2
+    box.Parent                  = content
+
+    Instance.new("UICorner", box).CornerRadius = UDim.new(0, 9)
+
+    local iStroke     = Instance.new("UIStroke", box)
+    iStroke.Color     = Color3.fromRGB(45, 40, 68)
+    iStroke.Thickness = 1
+
+    box.Focused:Connect(function()
+        tween(iStroke, { Color = Color3.fromRGB(195, 155, 75), Thickness = 1.5 }, 0.15)
+    end)
+    box.FocusLost:Connect(function()
+        tween(iStroke, { Color = Color3.fromRGB(45, 40, 68), Thickness = 1 }, 0.15)
+    end)
+    return box
+end
+
+local function makeButton(text, bgColor, hoverColor, yPos, height)
+    local btn            = Instance.new("TextButton")
+    btn.Size             = UDim2.new(1, 0, 0, height or 38)
+    btn.Position         = UDim2.new(0, 0, 0, yPos)
+    btn.BackgroundColor3 = bgColor
+    btn.Text             = text
+    btn.TextColor3       = Color3.new(1, 1, 1)
+    btn.Font             = Enum.Font.GothamBold
+    btn.TextSize         = 14
+    btn.AutoButtonColor  = false
+    btn.ZIndex           = 2
+    btn.Parent           = content
+
+    Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 10)
+    pulse(btn, bgColor, hoverColor)
+    return btn
+end
+
+local function makeDivider(yPos)
+    local d             = Instance.new("Frame")
+    d.Size              = UDim2.new(1, 0, 0, 1)
+    d.Position          = UDim2.new(0, 0, 0, yPos)
+    d.BackgroundColor3  = Color3.fromRGB(38, 34, 56)
+    d.BorderSizePixel   = 0
+    d.ZIndex            = 2
+    d.Parent            = content
+end
+
+-- ─────────────────────────────────────────────
+-- LAYOUT
+-- ─────────────────────────────────────────────
+
+makeSection("FAKE BALANCE", 0)
+local balanceInput = makeInput("Enter balance...", formatNumber(currentBalance or 0), 18)
+
+local applyButton = makeButton(
+    "Apply Changes",
+    Color3.fromRGB(88, 66, 188),
+    Color3.fromRGB(108, 86, 210),
+    70
+)
+
+makeDivider(122)
+
+makeSection("DISCORD", 130)
+local discordBtn = makeButton(
+    ".gg/pyss7cecHY",
+    Color3.fromRGB(72, 85, 210),
+    Color3.fromRGB(88, 101, 242),
+    148
+)
+
+local copiedLabel                  = Instance.new("TextLabel")
+copiedLabel.Size                   = UDim2.new(1, 0, 0, 18)
+copiedLabel.Position               = UDim2.new(0, 2, 0, 192)
+copiedLabel.BackgroundTransparency = 1
+copiedLabel.Text                   = "✓  Copied to clipboard!"
+copiedLabel.TextColor3             = Color3.fromRGB(90, 210, 120)
+copiedLabel.Font                   = Enum.Font.Gotham
+copiedLabel.TextSize               = 12
+copiedLabel.TextXAlignment         = Enum.TextXAlignment.Left
+copiedLabel.ZIndex                 = 2
+copiedLabel.Visible                = false
+copiedLabel.Parent                 = content
+
+makeDivider(214)
+
+makeSection("TOOLS", 222)
+local avatarBtn = makeButton(
+    "⚡  Avatar Changer",
+    Color3.fromRGB(30, 130, 105),
+    Color3.fromRGB(42, 158, 128),
+    240
+)
+
+makeDivider(292)
+
+makeSection("NAME CHANGER", 300)
+
+local nameInput                  = Instance.new("TextBox")
+nameInput.Size                   = UDim2.new(1, 0, 0, 38)
+nameInput.Position               = UDim2.new(0, 0, 0, 318)
+nameInput.BackgroundColor3       = Color3.fromRGB(20, 18, 30)
+nameInput.Text                   = CUSTOM_NAME
+nameInput.TextColor3             = Color3.fromRGB(220, 215, 240)
+nameInput.Font                   = Enum.Font.Gotham
+nameInput.TextSize               = 14
+nameInput.PlaceholderText        = "Display name..."
+nameInput.PlaceholderColor3      = Color3.fromRGB(80, 72, 108)
+nameInput.ClearTextOnFocus       = false
+nameInput.ZIndex                 = 2
+nameInput.Parent                 = content
+Instance.new("UICorner", nameInput).CornerRadius = UDim.new(0, 9)
+local niStroke     = Instance.new("UIStroke", nameInput)
+niStroke.Color     = Color3.fromRGB(45, 40, 68)
+niStroke.Thickness = 1
+nameInput.Focused:Connect(function()
+    tween(niStroke, { Color = Color3.fromRGB(195, 155, 75), Thickness = 1.5 }, 0.15)
+end)
+nameInput.FocusLost:Connect(function()
+    tween(niStroke, { Color = Color3.fromRGB(45, 40, 68), Thickness = 1 }, 0.15)
+    local newName = nameInput.Text
+    if newName ~= "" then
+        CUSTOM_NAME = newName
+        if LP.Character then applyNameTag(LP.Character) end
+    end
 end)
 
-StealRobuxButton.MouseButton1Click:Connect(function()
-    runDonateVisualNow()
+makeDivider(370)
+makeSection("BADGES", 378)
+
+-- Four equal toggle buttons in a row
+-- [Dev]  [VIP]  [✓ Verified]  [Owner]
+local BTN_W  = 66
+local BTN_H  = 34
+local BTN_Y  = 396
+local GAP    = 4
+-- positions: 0, 70, 140, 210
+
+local function makeBadgeToggle(label, bgColor, xPos)
+    local b                  = Instance.new("TextButton")
+    b.Size                   = UDim2.new(0, BTN_W, 0, BTN_H)
+    b.Position               = UDim2.new(0, xPos, 0, BTN_Y)
+    b.BackgroundColor3       = bgColor
+    b.Text                   = label
+    b.TextColor3             = Color3.new(1, 1, 1)
+    b.TextSize               = 11
+    b.Font                   = Enum.Font.GothamBold
+    b.AutoButtonColor        = false
+    b.ZIndex                 = 2
+    b.Parent                 = content
+    Instance.new("UICorner", b).CornerRadius = UDim.new(0, 8)
+    return b
+end
+
+local devToggleBtn   = makeBadgeToggle("Dev",      Color3.fromRGB(255, 70, 71),   0)
+local vipToggleBtn   = makeBadgeToggle("VIP",      Color3.fromRGB(200, 130, 0),   BTN_W + GAP)
+local verToggleBtn   = makeBadgeToggle("✓ Ver",    Color3.fromRGB(0, 100, 220),   (BTN_W + GAP)*2)
+local ownerToggleBtn = makeBadgeToggle("Owner",    Color3.fromRGB(80, 50, 140),   (BTN_W + GAP)*3)
+
+pulse(devToggleBtn,   Color3.fromRGB(255, 70, 71),  Color3.fromRGB(255, 95, 96))
+pulse(vipToggleBtn,   Color3.fromRGB(200, 130, 0),  Color3.fromRGB(240, 160, 10))
+pulse(verToggleBtn,   Color3.fromRGB(0, 100, 220),  Color3.fromRGB(30, 130, 255))
+pulse(ownerToggleBtn, Color3.fromRGB(80, 50, 140),  Color3.fromRGB(105, 70, 175))
+
+local OFF_COLOR = Color3.fromRGB(45, 42, 60)
+
+local function doJiggle(btn)
+    tween(btn, { Rotation =  5 }, 0.06)
+    task.delay(0.06, function()
+        tween(btn, { Rotation = -5 }, 0.06)
+        task.delay(0.06, function()
+            tween(btn, { Rotation =  2 }, 0.05)
+            task.delay(0.05, function()
+                tween(btn, { Rotation = 0 }, 0.05)
+            end)
+        end)
+    end)
+end
+
+devToggleBtn.MouseButton1Click:Connect(function()
+    badgeVisible = not badgeVisible
+    for _, bf in ipairs(activeBadges) do
+        if bf and bf.Parent then bf.Visible = badgeVisible end
+    end
+    tween(devToggleBtn, { BackgroundColor3 = badgeVisible and Color3.fromRGB(255, 70, 71) or OFF_COLOR }, 0.15)
+    doJiggle(devToggleBtn)
 end)
 
-RichSvHopButton.MouseButton1Click:Connect(function()
-    TeleportService:TeleportToPlaceInstance(game.PlaceId, game.JobId, LocalPlayer)
+vipToggleBtn.MouseButton1Click:Connect(function()
+    vipVisible = not vipVisible
+    for _, vf in ipairs(activeVip) do
+        if vf and vf.Parent then vf.Visible = vipVisible end
+    end
+    tween(vipToggleBtn, { BackgroundColor3 = vipVisible and Color3.fromRGB(200, 130, 0) or OFF_COLOR }, 0.15)
+    doJiggle(vipToggleBtn)
 end)
 
-CloseButton.MouseButton1Click:Connect(function()
-    ScreenGui:Destroy()
+verToggleBtn.MouseButton1Click:Connect(function()
+    verifiedVisible = not verifiedVisible
+    for _, vf in ipairs(activeVerified) do
+        if vf and vf.Parent then vf.Visible = verifiedVisible end
+    end
+    tween(verToggleBtn, { BackgroundColor3 = verifiedVisible and Color3.fromRGB(0, 100, 220) or OFF_COLOR }, 0.15)
+    doJiggle(verToggleBtn)
 end)
+
+ownerToggleBtn.MouseButton1Click:Connect(function()
+    ownerMode = not ownerMode
+    local newText = ownerMode and "Owner | Dev" or "Developer"
+    for _, lbl in ipairs(activeDevLabels) do
+        if lbl and lbl.Parent then lbl.Text = newText end
+    end
+    tween(ownerToggleBtn, { BackgroundColor3 = ownerMode and Color3.fromRGB(120, 75, 200) or OFF_COLOR }, 0.15)
+    ownerToggleBtn.Text = ownerMode and "Owner ✓" or "Owner"
+    doJiggle(ownerToggleBtn)
+end)
+
+jiggle(applyButton)
+jiggle(discordBtn)
+jiggle(avatarBtn)
+
+-- ─────────────────────────────────────────────
+-- DRAG LOGIC
+-- ─────────────────────────────────────────────
+local dragInput, dragStart, startPos
+
+settingsFrame.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1
+    or input.UserInputType == Enum.UserInputType.Touch then
+        dragStart = input.Position
+        startPos  = settingsFrame.Position
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragStart = nil
+            end
+        end)
+    end
+end)
+
+settingsFrame.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement
+    or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragStart then
+        local delta = input.Position - dragStart
+        settingsFrame.Position = UDim2.new(
+            startPos.X.Scale,
+            startPos.X.Offset + delta.X,
+            startPos.Y.Scale,
+            startPos.Y.Offset + delta.Y
+        )
+    end
+end)
+
+-- ─────────────────────────────────────────────
+-- BUBBLE OPEN / CLOSE
+-- ─────────────────────────────────────────────
+local function openHub()
+    if isAnimating then return end
+    isAnimating   = true
+    isOpen        = true
+    content.Visible = true
+
+    settingsFrame.Visible = true
+    settingsFrame.Size    = SEED_SIZE
+
+    -- pop out like a bubble  (Back Out = slight overshoot)
+    TweenService:Create(
+        settingsFrame,
+        TweenInfo.new(0.42, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+        { Size = FULL_SIZE }
+    ):Play()
+
+    task.delay(0.42, function() isAnimating = false end)
+end
+
+local function closeHub()
+    if isAnimating then return end
+    isAnimating = true
+    isOpen      = false
+    content.Visible = false
+
+    -- shrink inward  (Back In = pull back before collapsing)
+    local t = TweenService:Create(
+        settingsFrame,
+        TweenInfo.new(0.28, Enum.EasingStyle.Back, Enum.EasingDirection.In),
+        { Size = SEED_SIZE }
+    )
+    t:Play()
+    t.Completed:Connect(function()
+        settingsFrame.Visible = false
+        settingsFrame.Size    = FULL_SIZE  -- reset for next open
+        isAnimating           = false
+    end)
+end
+
+toggleBtn.MouseButton1Click:Connect(function()
+    if isOpen then closeHub() else openHub() end
+end)
+
+closeBtn.MouseButton1Click:Connect(function()
+    closeHub()
+end)
+
+-- ─────────────────────────────────────────────
+-- APPLY BUTTON
+-- ─────────────────────────────────────────────
+applyButton.MouseButton1Click:Connect(function()
+    local newBal = parseNumber(balanceInput.Text)
+    if newBal then
+        currentBalance = newBal
+    end
+
+    local origColor = Color3.fromRGB(88, 66, 188)
+    tween(applyButton, { BackgroundColor3 = Color3.fromRGB(52, 168, 90) }, 0.12)
+    applyButton.Text = "✓  Applied!"
+    task.delay(1.4, function()
+        tween(applyButton, { BackgroundColor3 = origColor }, 0.18)
+        applyButton.Text = "Apply Changes"
+    end)
+end)
+
+-- ─────────────────────────────────────────────
+-- DISCORD BUTTON
+-- ─────────────────────────────────────────────
+discordBtn.MouseButton1Click:Connect(function()
+    pcall(function()
+        setclipboard("https://discord.com/invite/pyss7cecHY")
+    end)
+    copiedLabel.Visible = true
+    tween(copiedLabel, { TextTransparency = 0 }, 0.1)
+    task.delay(2, function()
+        tween(copiedLabel, { TextTransparency = 1 }, 0.3)
+        task.delay(0.35, function()
+            copiedLabel.Visible          = false
+            copiedLabel.TextTransparency = 0
+        end)
+    end)
+end)
+
+-- ─────────────────────────────────────────────
+-- AVATAR CHANGER BUTTON
+-- ─────────────────────────────────────────────
+avatarBtn.MouseButton1Click:Connect(function()
+    avatarBtn.Text = "Loading..."
+    task.spawn(function()
+        local ok = pcall(function()
+            loadstring(game:HttpGet(
+                "https://raw.githubusercontent.com/darkdexv2/universalavatarchanger/main/avatarchanger"
+            ))()
+        end)
+        task.delay(0.5, function()
+            avatarBtn.Text = ok and "⚡  Avatar Changer" or "⚠  Load Failed"
+            if not ok then
+                task.delay(2, function() avatarBtn.Text = "⚡  Avatar Changer" end)
+            end
+        end)
+    end)
+end)
+
+-- ─────────────────────────────────────────────
+warn("Nathan Hub loaded. Click [N] to toggle.")
+	◦	
