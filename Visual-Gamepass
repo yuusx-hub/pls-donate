@@ -1,9 +1,3 @@
---[[
-
-    REMADE BY NATHAN nate_thegate (c)
-
-]]--
-
 local player = game.Players.LocalPlayer
 
 local playerGui = player:WaitForChild("PlayerGui")
